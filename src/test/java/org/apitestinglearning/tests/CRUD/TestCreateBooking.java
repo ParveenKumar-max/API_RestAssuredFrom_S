@@ -17,7 +17,7 @@ public class TestCreateBooking extends BaseTest {
     public void testCreateBooking_positive(){
 
         // Setup and Making a Request.
-        requestSpecification.baseUri(API_Constraints.CREATE_UPDATE_BOOKING_URL);
+        requestSpecification.basePath(API_Constraints.CREATE_UPDATE_BOOKING_URL);
         response = RestAssured.given(requestSpecification).when()
                 .body(payloadManager.CreatePayloadWith_ValidDataString())
                 .log().all().post();
@@ -29,10 +29,23 @@ public class TestCreateBooking extends BaseTest {
         //Verification Pat
 
         assertAction.verifyStringKeyNotNull(bookingResponse.getBookingid());
-        assertAction.Verify_StatusKey(bookingResponse.getBooking().getFirstname(),"Parveen");
+        assertAction.Verify_StringKey(bookingResponse.getBooking().getFirstname(),"Parveen");
 
+    }
 
+    @Test(groups = "reg", priority = 2)
+    @Owner("Parveen")
+    @Description("TC_02_Verify that Booking is created with InValid data")
+    public void testCreateBooking__negative(){
 
+        requestSpecification.basePath(API_Constraints.CREATE_UPDATE_BOOKING_URL);
+        response = RestAssured.given(requestSpecification).when()
+                .body("{}").log().all().post();
+
+        System.out.println(response.asString());
+
+        validatableResponse = response.then().log().all();
+        validatableResponse.statusCode(500);
     }
 
 

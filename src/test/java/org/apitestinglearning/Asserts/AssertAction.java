@@ -24,7 +24,7 @@ public class AssertAction {
         assertEquals(response.getStatusCode(), expected);
     }
 
-    public void Verify_StatusKey(String KeyExpected, String KeyActual) {
+    public void Verify_StringKey(String KeyExpected, String KeyActual) {
         // assertJ library function we are using below
 
         assertThat(KeyExpected).isNotNull();

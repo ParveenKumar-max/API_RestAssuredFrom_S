@@ -20,7 +20,6 @@ public class BaseTest {
 
 
     public RequestSpecification requestSpecification;
-    public RequestSpecBuilder requestSpecBuilder;
     public Response response;
     public ValidatableResponse validatableResponse;
     public PayloadManager payloadManager;
@@ -44,8 +43,8 @@ public class BaseTest {
 
         // There is one more way to define or call the baseURl -->  RequestSpecBuilder
 
-        requestSpecBuilder = new RequestSpecBuilder();
-        requestSpecBuilder.setBasePath(API_Constraints.BASE_URL)
+        requestSpecification = new RequestSpecBuilder()
+                .setBaseUri(API_Constraints.BASE_URL)
                 .addHeader("Content-Type", "application/json")
                 .build().log().all();
 
@@ -53,7 +52,7 @@ public class BaseTest {
     }
 
     @AfterTest
-    public void tearDown(){
+    public void tearDown() {
         System.out.println("Ending of the program or Test");
     }
 
