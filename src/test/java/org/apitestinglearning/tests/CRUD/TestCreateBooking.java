@@ -49,4 +49,19 @@ public class TestCreateBooking extends BaseTest {
     }
 
 
+    @Test(groups = "reg", priority = 2)
+    @Owner("Parveen")
+    @Description("TC_03_Verify that Booking isn't created with missing data")
+    public void testCreateBooking__missingData(){
+
+        requestSpecification.basePath(API_Constraints.CREATE_UPDATE_BOOKING_URL);
+        response = RestAssured.given(requestSpecification).when()
+                .body(payloadManager.CreatePayloadWith_ValidMissingDataString()).log().all().post();
+
+        System.out.println(response.asString());
+
+        validatableResponse = response.then().log().all();
+        validatableResponse.statusCode(500);
+    }
+
 }

@@ -42,6 +42,9 @@ public class BaseTest {
         requestSpecification.contentType(ContentType.JSON).log().all();    */
 
         // There is one more way to define or call the baseURl -->  RequestSpecBuilder
+        // Base URI (Uniform Resource Identifier) is the root address or
+        // base path of an API that stays common
+        // across all endpoints.
 
         requestSpecification = new RequestSpecBuilder()
                 .setBaseUri(API_Constraints.BASE_URL)
