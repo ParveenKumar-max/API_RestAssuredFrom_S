@@ -9,3 +9,6 @@ Adding BaseTest, CRED files, AssertAction class files in test folder.
 Create full folder structure from scratch
 
 Add two TC's in git hub respository succesfully.
+
+Add CRED flow, In File perform full flow. Create, Read, Update and Delete
+
