@@ -4,9 +4,8 @@
     <test verbose="2" preserve-order="true" name="C:/Users/Parveen/IdeaProjects/APIFrameowrk_Scratch">
 
         <classes>
-            <class name="org.apitestinglearning.tests.CRUD.TestCreateBooking"></class>
-             <class name="org.apitestinglearning.tests.CRUD.TestCreateToken"></class>
-            <class name="org.apitestinglearning.tests.CRUD.TestHealthCheck"></class>
+
+            <class name="org.apitestinglearning.tests.E2E_Intergration.E2EndFlow_API"></class>
 
         </classes>
     </test>

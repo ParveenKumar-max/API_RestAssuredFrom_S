@@ -54,6 +54,24 @@ public class BaseTest {
 
     }
 
+    public String getToken(){
+
+        requestSpecification = RestAssured.given();
+        requestSpecification.baseUri(API_Constraints.BASE_URL)
+                .basePath(API_Constraints.AUTH_URL)
+                .when().log().all();
+
+        String payloadString = payloadManager.CreatePayload_setValidToken();
+
+        response = requestSpecification.contentType(ContentType.JSON)
+                .body(payloadString).when().post();
+
+        String Token = payloadManager.getTokenFromJson(response.asString());
+        return Token;
+
+
+    }
+
     @AfterTest
     public void tearDown() {
         System.out.println("Ending of the program or Test");
