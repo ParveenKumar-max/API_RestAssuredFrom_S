@@ -126,8 +126,8 @@ public class PayloadManager {
 
     public String fullUpdatePayloadAsString() {
         Booking booking = new Booking();
-        booking.setFirstname("Lucky");
-        booking.setLastname("Dutta");
+        booking.setFirstname("Pintu");
+        booking.setLastname("Dogra");
         booking.setTotalprice(112);
         booking.setDepositpaid(true);
 
@@ -143,8 +143,8 @@ public class PayloadManager {
 
     public String partialUpdatePayloadAsString() {
         Booking booking = new Booking();
-        booking.setFirstname("Lucky");
-        booking.setLastname("Dutta");
+        booking.setFirstname("Pintu");
+        booking.setLastname("Dogra");
         return gson.toJson(booking);
 
     }

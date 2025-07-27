@@ -5,6 +5,7 @@ import io.qameta.allure.Owner;
 import io.restassured.RestAssured;
 import org.apitestinglearning.Base.BaseTest;
 import org.apitestinglearning.EndPoints.APIConstraints.API_Constraints;
+import org.apitestinglearning.POJO.Booking;
 import org.apitestinglearning.POJO.Booking_Response;
 import org.testng.ITestContext;
 import org.testng.annotations.Test;
@@ -28,35 +29,32 @@ public class E2EndFlow_API extends BaseTest {
     // 5. Delete the Booking - Need to get the token, bookingID from above request
 
 
-
     @Test(groups = "qa", priority = 1)
-    @Owner("Promode")
-    @Description("TC#INT1 - Step 1. Verify that the Booking can be Created")
-    public void testCreateBooking(ITestContext iTestContext){
+    @Owner("Parveen Chaudhary")
+    @Description("TC_01 - Step 1. Verify that the Booking can be Created")
+    public void testCreateBooking(ITestContext iTestContext) {
 
         requestSpecification.basePath(API_Constraints.CREATE_UPDATE_BOOKING_URL);
         response = RestAssured.given(requestSpecification)
-                .when().body(payloadManager.CreatePayloadWith_ValidMissingDataString())
+                .when().body(payloadManager.CreatePayloadWith_ValidDataString())
                 .post();
         validatableResponse = response.then().log().all();
         validatableResponse.statusCode(200);
         Booking_Response bookingResponse = payloadManager.bookingResponseJava(response.asString());
-        assertAction.Verify_StringKey(bookingResponse.getBooking().getFirstname(), "Pramod");
+        assertAction.Verify_StringKey(bookingResponse.getBooking().getFirstname(), "Parveen");
         assertAction.verifyStringKeyNotNull(bookingResponse.getBookingid());
 
-        iTestContext.setAttribute("bookingid",bookingResponse.getBookingid());
+        iTestContext.setAttribute("bookingid", bookingResponse.getBookingid());
     }
-
-/*
 
 
     @Test(groups = "qa", priority = 2)
-    @Owner("Promode")
-    @Description("TC#INT1 - Step 2. Verify that the Booking By ID")
-    public void testVerifyBookingId(ITestContext iTestContext){
+    @Owner("Parveen Chaudhary")
+    @Description("TC_01 - Step 2. Verify that the Booking By ID")
+    public void testVerifyBookingId(ITestContext iTestContext) {
         Integer bookingid = (Integer) iTestContext.getAttribute("bookingid");
 
-        String basePathGET = APIConstants.CREATE_UPDATE_BOOKING_URL+"/" + bookingid;
+        String basePathGET = API_Constraints.CREATE_UPDATE_BOOKING_URL + "/" + bookingid;
         System.out.println(basePathGET);
 
         requestSpecification.basePath(basePathGET);
@@ -68,23 +66,26 @@ public class E2EndFlow_API extends BaseTest {
         validatableResponse.statusCode(200);
 
         Booking booking = payloadManager.getResponseFromJSON(response.asString());
-        assertActions.verifyStringKeyNotNull(booking.getFirstname());
+        assertAction.verifyStringKeyNotNull(booking.getFirstname());
 
 
     }
 
+
     @Test(groups = "qa", priority = 3)
-    @Owner("Promode")
-    @Description("TC#INT1 - Step 3. Verify Updated Booking by ID")
-    public void testUpdateBookingByID(ITestContext iTestContext){
+    @Owner("Parveen Chaudhary")
+    @Description("TC_01 - Step 3. Verify Updated Booking by ID")
+    public void testUpdateBookingByID(ITestContext iTestContext) {
 
 
         Integer bookingid = (Integer) iTestContext.getAttribute("bookingid");
         String token = getToken();
-        iTestContext.setAttribute("token",token);
+        System.out.println(token);
+
+        iTestContext.setAttribute("token", token);
 
 
-        String basePathPUTPATCH = APIConstants.CREATE_UPDATE_BOOKING_URL + "/" + bookingid;
+        String basePathPUTPATCH = API_Constraints.CREATE_UPDATE_BOOKING_URL + "/" + bookingid;
         System.out.println(basePathPUTPATCH);
 
         requestSpecification.basePath(basePathPUTPATCH);
@@ -100,21 +101,21 @@ public class E2EndFlow_API extends BaseTest {
 
         Booking booking = payloadManager.getResponseFromJSON(response.asString());
 
-        assertActions.verifyStringKeyNotNull(booking.getFirstname());
-        assertActions.verifyStringKey(booking.getFirstname(),"Lucky");
+        assertAction.verifyStringKeyNotNull(booking.getFirstname());
+        assertAction.Verify_StringKey(booking.getFirstname(), "Pintu");
 
 
     }
 
     @Test(groups = "qa", priority = 4)
-    @Owner("Promode")
+    @Owner("Parveen Chaudhary")
     @Description("TC#INT1 - Step 4. Delete the Booking by ID")
-    public void testDeleteBookingById(ITestContext iTestContext){
+    public void testDeleteBookingById(ITestContext iTestContext) {
 
         Integer bookingid = (Integer) iTestContext.getAttribute("bookingid");
-        String token = (String)iTestContext.getAttribute("token");
+        String token = (String) iTestContext.getAttribute("token");
 
-        String basePathDELETE = APIConstants.CREATE_UPDATE_BOOKING_URL + "/" + bookingid;
+        String basePathDELETE = API_Constraints.CREATE_UPDATE_BOOKING_URL + "/" + bookingid;
 
         requestSpecification.basePath(basePathDELETE).cookie("token", token);
         validatableResponse = RestAssured.given().spec(requestSpecification)
@@ -122,8 +123,6 @@ public class E2EndFlow_API extends BaseTest {
         validatableResponse.statusCode(201);
 
 
-
-*/
-
     }
 
+}

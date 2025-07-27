@@ -25,7 +25,7 @@ public class TestCreateToken extends BaseTest {
                 .when()
                 .body(payloadManager.CreatePayload_setValidToken())
                 .post();
-       // System.out.println(response.asString());
+       System.out.println(response.asString());
 
         // Extraction ( JSON String response to Java Object
 
